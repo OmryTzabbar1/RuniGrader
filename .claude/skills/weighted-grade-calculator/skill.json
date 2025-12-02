@@ -7,10 +7,6 @@
   "category": "grading",
   "tags": ["grading", "self-assessment", "metacognitive", "penalty-formula", "excel", "pdf-extraction"],
   "prompt": "prompt.md",
-  "helperScripts": {
-    "batch": "calculate_weighted_grades.py",
-    "single": "calculate_single_weighted.py"
-  },
   "dependencies": {
     "python": ">=3.7",
     "packages": ["openpyxl", "PyPDF2"]
@@ -34,19 +30,9 @@
   },
   "examples": [
     {
-      "name": "Process all students (CLI skill)",
+      "name": "Process all students",
       "command": "/weighted-grade-calculator",
-      "description": "Interactive mode - Claude will ask for Excel and submissions paths"
-    },
-    {
-      "name": "Process all students (Python script)",
-      "command": "python calculate_weighted_grades.py --excel ../../Assignment3_Grading_Summary.xlsx --submissions ../../WorkSubmissions01",
-      "description": "Direct script execution for automation"
-    },
-    {
-      "name": "Test single student calculation",
-      "command": "python calculate_single_weighted.py --self-grade 95 --base-grade 85",
-      "description": "Quick test of formula with specific values"
+      "description": "Interactive mode - Claude will ask for Excel and submissions paths, then process all students"
     }
   ]
 }

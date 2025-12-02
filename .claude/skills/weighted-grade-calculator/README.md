@@ -4,32 +4,24 @@ Calculate weighted final grades using the exponential self-grading penalty formu
 
 ## Quick Start
 
-### Install Dependencies
+### Using the Claude CLI Skill
 
-```bash
-pip install openpyxl PyPDF2
+Invoke the skill in Claude Code:
+
+```
+/weighted-grade-calculator
 ```
 
-### Process All Students
+Claude will interactively ask you for:
+1. Path to the Excel grading summary file
+2. Path to the student submissions directory
+3. Whether to create a new file or update the existing one
 
-```bash
-python calculate_weighted_grades.py \
-  --excel "../../Assignment3_Grading_Summary.xlsx" \
-  --submissions "../../WorkSubmissions01"
-```
-
-### Test Single Student
-
-```bash
-# Accurate self-assessment
-python calculate_single_weighted.py --self-grade 85 --base-grade 85
-
-# Humble student
-python calculate_single_weighted.py --self-grade 70 --base-grade 85
-
-# Overconfident student
-python calculate_single_weighted.py --self-grade 95 --base-grade 70
-```
+The skill will then:
+- Extract self-grades from student PDFs
+- Calculate weighted grades using the exponential penalty formula
+- Update the Excel spreadsheet with results
+- Generate a comprehensive summary report
 
 ## How It Works
 
@@ -98,17 +90,15 @@ else:
 
 ## Usage Examples
 
-### Example 1: Process All Students
+### Example: Process All Students
 
-```bash
-cd .claude/skills/weighted-grade-calculator
+Invoke the skill in Claude Code:
 
-python calculate_weighted_grades.py \
-  --excel "../../Assignment3_Grading_Summary.xlsx" \
-  --submissions "../../WorkSubmissions01"
+```
+/weighted-grade-calculator
 ```
 
-**Output:**
+**Expected Output:**
 ```
 ✓ Backup created: Assignment3_Grading_Summary_backup_20251202_143022.xlsx
 
@@ -154,50 +144,9 @@ Top 3 Most Overconfident:
 ✅ Weighted grade calculation complete!
 ```
 
-### Example 2: Test Single Student
-
-```bash
-python calculate_single_weighted.py --self-grade 95 --base-grade 85
-```
-
-**Output:**
-```
-============================================================
-╔════════════════════════════════════════════════╗
-║       WEIGHTED GRADE CALCULATION              ║
-╚════════════════════════════════════════════════╝
-
-Self-Proclaimed Grade:  95/100
-Base Grade (Earned):    85.00/100
-Difference:             10.00 points
-
-Scale Multiplier:       1.1789
-Penalty Applied:        11.79 points
-
-╔════════════════════════════════════════════════╗
-║  WEIGHTED GRADE:   73.21/100              ║
-╚════════════════════════════════════════════════╝
-
-Assessment: ⚠️ SLIGHTLY OPTIMISTIC
-→ Small penalty for slight overconfidence.
-
-============================================================
-```
-
-### Example 3: Save to New File
-
-```bash
-python calculate_weighted_grades.py \
-  --excel "Assignment3_Grading_Summary.xlsx" \
-  --submissions "WorkSubmissions01" \
-  --output "Assignment3_Grading_Summary_Weighted.xlsx"
-```
-
-This creates a new file with weighted grades while preserving the original.
-
 ## Self-Grade Extraction
 
-The script searches for self-grades in student PDFs using these patterns:
+The skill searches for self-grades in student PDFs using these patterns:
 
 ```python
 patterns = [
@@ -251,34 +200,20 @@ Self = 100, Base = 40, Penalty = 81
 .claude/skills/weighted-grade-calculator/
 ├── SKILL.md                          # Skill definition and rubric
 ├── README.md                         # This file
-├── calculate_weighted_grades.py      # Main script (process all students)
-├── calculate_single_weighted.py      # Test script (single student)
+├── prompt.md                         # Claude CLI skill prompt
 └── skill.json                        # Claude Code skill metadata
 ```
 
 ## Dependencies
 
-```bash
-pip install openpyxl PyPDF2
-```
+The skill requires Python packages for Excel and PDF processing:
 
 - **openpyxl:** Read/write Excel files
-- **PyPDF2:** Extract text from PDFs (optional, graceful degradation)
+- **PyPDF2:** Extract text from PDFs
+
+Claude will handle these dependencies automatically when invoking the skill.
 
 ## Troubleshooting
-
-### Error: "openpyxl not installed"
-
-```bash
-pip install openpyxl
-```
-
-### Warning: "PyPDF2 not installed"
-
-Script will still work but can't extract self-grades from PDFs. Install:
-```bash
-pip install PyPDF2
-```
 
 ### Error: "Required columns not found in Excel"
 
@@ -289,11 +224,11 @@ Make sure your Excel has these columns:
 
 ### Warning: "No self-grade found"
 
-This is normal. Script uses base grade as default (no penalty).
+This is normal. The skill uses base grade as default (no penalty).
 
 ### Excel file is locked
 
-Close Excel before running the script. A backup is created automatically.
+Close Excel before invoking the skill. A backup is created automatically.
 
 ## Integration with Grading Workflow
 
