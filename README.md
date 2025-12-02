@@ -114,11 +114,24 @@ RuniGrader/
 │   │   ├── SKILL.md
 │   │   └── find_quality_tools.py
 │   │
-│   ├── grade-report-generator/     # PDF report generator
+│   ├── grade-report-generator/     # 📋 PDF report generator (with weighted grades)
 │   │   ├── SKILL.md                # Skill definition
 │   │   ├── README.md               # Full documentation
 │   │   ├── SUMMARY.md              # Quick reference
 │   │   └── generate_student_report.py  # Main script
+│   │
+│   ├── weighted-grade-calculator/  # 📊 Weighted grading with penalty formula
+│   │   ├── skill.json              # Claude CLI skill metadata
+│   │   ├── prompt.md               # Claude CLI instructions
+│   │   ├── README.md               # Usage guide
+│   │   └── SKILL.md                # Technical documentation
+│   │
+│   ├── pdf-merger/                 # 📑 PDF merger skill
+│   │   ├── skill.json              # Claude CLI skill metadata
+│   │   ├── prompt.md               # Claude CLI instructions
+│   │   ├── merge_pdfs.py           # Standalone merge script
+│   │   ├── README.md               # Usage guide
+│   │   └── SKILL.md                # Technical documentation
 │   │
 │   ├── grade-extractor/            # Grade extraction tools
 │   │   ├── extract_grades.py       # Extract from assessments
@@ -140,15 +153,16 @@ RuniGrader/
 │   ├── IMPLEMENTATION_PLAN.md      # Implementation details
 │   └── grading_formula_description.md  # Grading formulas
 │
-├── 📂 WorkSubmissions01/           # Assignment 1 submissions (46 students)
+├── 📂 WorkSubmissions01/           # Assignment 1 submissions (46 students) ⭐ MAIN
 │   ├── Participant_38950_assignsubmission_file/
 │   │   ├── repo/                   # Student's repository (submodule)
-│   │   ├── repo_assessment.md      # Assessment markdown
-│   │   ├── Student_Grade_Report_38950.pdf  # Generated PDF
-│   │   ├── submission_info.xlsx    # Submission metadata
-│   │   └── *.pdf                   # Student's submission PDF
+│   │   ├── repo_assessment.md      # Tier 2 assessment (10 skills)
+│   │   ├── submission_info.xlsx    # Submission metadata (self-grade here!)
+│   │   ├── hw1 llms agents.pdf     # Student's original submission
+│   │   ├── Student_Grade_Report_38950.pdf  # ✅ Generated report (weighted grade)
+│   │   └── Student_38950_Complete_Submission.pdf  # ✅ Merged PDF (submission + report)
 │   ├── Participant_38951_assignsubmission_file/
-│   │   └── ...
+│   │   └── ... (same structure)
 │   └── ... (46 total participants)
 │
 ├── 📂 WorkSubmissions02/           # Assignment 2 submissions (28 students)
@@ -167,10 +181,16 @@ RuniGrader/
 │
 ├── 📂 assessments_tier2/           # Tier 2 assessment results
 │
-├── 📄 create_grading_excel.py      # Excel summary generator
+├── 📄 create_grading_excel.py      # Excel summary generator (with self-grade column)
+├── 📄 regenerate_reports_with_weighted_grades.py  # Regenerate PDFs with weighted grades
+├── 📄 add_self_grade_column.py     # Add self-grade column to Excel
+├── 📄 extract_self_grades_from_excel.py  # Extract self-grades from submissions
+├── 📄 calculate_weighted_grades_final.py  # Calculate weighted grades with penalty
 ├── 📄 create_lstm_excel_files.py   # LSTM assignment Excel generator
 │
-├── 📊 Assignment3_Grading_Summary.xlsx  # Main grading spreadsheet
+├── 📊 Assignment3_Grading_Summary.xlsx  # ⭐ MAIN GRADING SPREADSHEET
+│   │                                    # Contains: Base grades, Self-grades, Weighted grades
+│   │                                    # 11 columns × 46 students
 ├── 📊 grades_hw1.xlsx              # Assignment 1 grades
 │
 ├── 📄 DIRECTORY_STRUCTURE.md       # Project structure overview
