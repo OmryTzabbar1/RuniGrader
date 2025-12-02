@@ -1,0 +1,36 @@
+{
+  "name": "batch-repo-assessment",
+  "version": "1.0.0",
+  "description": "Batch assess all student GitHub repositories using git-repo-assessment command",
+  "author": "Claude Code",
+  "type": "agent",
+  "category": "education",
+  "keywords": ["grading", "github", "assessment", "automation", "batch"],
+  "dependencies": {
+    "python": ">=3.7",
+    "packages": ["openpyxl>=3.1.2"]
+  },
+  "files": {
+    "scripts": [
+      "batch_assess.py"
+    ]
+  },
+  "usage": {
+    "trigger": "Batch assess all student repositories",
+    "examples": [
+      "Run batch assessment on all students",
+      "Assess all GitHub repos from WorkSubmissions01"
+    ]
+  },
+  "features": [
+    "Extract GitHub URLs from individual student Excel files",
+    "Call git-repo-assessment for each repository",
+    "Save assessment markdown in each student's folder",
+    "Progress tracking and error handling",
+    "Summary report of all assessments"
+  ],
+  "output": {
+    "format": "Markdown (.md) per student folder",
+    "location": "WorkSubmissions01/Participant_XXXXX_assignsubmission_file/assessment.md"
+  }
+}

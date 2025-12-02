@@ -1,0 +1,53 @@
+{
+  "name": "grade-extractor",
+  "version": "1.0.0",
+  "description": "Extract student submission information from PDFs and create Excel spreadsheet",
+  "author": "Claude Code",
+  "type": "agent",
+  "category": "education",
+  "keywords": ["grading", "pdf", "excel", "education", "automation"],
+  "dependencies": {
+    "python": ">=3.7",
+    "packages": ["openpyxl>=3.1.2"]
+  },
+  "files": {
+    "main": "prompt.md",
+    "scripts": [
+      "extract_grades.py",
+      "update_excel.py"
+    ],
+    "docs": [
+      "README.md",
+      "skill.md"
+    ],
+    "requirements": "requirements.txt"
+  },
+  "usage": {
+    "trigger": "Extract grades from <folder>",
+    "examples": [
+      "Extract grades from WorkSubmissions01",
+      "Use grade-extractor to process all submissions",
+      "Create Excel file from student PDFs in WorkSubmissions02"
+    ]
+  },
+  "features": [
+    "Automatic PDF reading and parsing",
+    "Intelligent pattern matching for various formats",
+    "Support for English and Hebrew text",
+    "Professional Excel formatting",
+    "Error handling and progress reporting",
+    "Batch processing of multiple submissions"
+  ],
+  "output": {
+    "format": "Excel (.xlsx)",
+    "columns": [
+      "Participant ID",
+      "Group Code",
+      "Student 1",
+      "Student 2",
+      "GitHub Repository",
+      "Suggested Grade",
+      "PDF Filename"
+    ]
+  }
+}

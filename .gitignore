@@ -1,0 +1,41 @@
+# Student submissions (large directories)
+WorkSubmissions01/
+WorkSubmissions02/
+WorkSubmissions03/
+
+# Temporary grading folders
+grading_temp/
+assessments_tier2/
+temp_*/
+
+# Excel temporary files
+~$*.xlsx
+*.tmp
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# PDF reports (generated files)
+**/Student_Grade_Report_*.pdf
