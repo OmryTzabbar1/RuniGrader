@@ -1,14 +1,4 @@
-# Student submissions (large directories)
-WorkSubmissions01/
-WorkSubmissions02/
-WorkSubmissions03/
-
-# Temporary grading folders
-grading_temp/
-assessments_tier2/
-temp_*/
-
-# Excel temporary files
+# Excel temporary files (only temp files, not the actual data)
 ~$*.xlsx
 *.tmp
 
@@ -36,6 +26,3 @@ Thumbs.db
 
 # Logs
 *.log
-
-# PDF reports (generated files)
-**/Student_Grade_Report_*.pdf
