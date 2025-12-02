@@ -1,0 +1,56 @@
+{
+  "name": "weighted-grade-calculator",
+  "version": "1.0.0",
+  "description": "Calculate weighted grades using exponential self-grading penalty formula",
+  "author": "RuniGrader",
+  "main": "calculate_weighted_grades.py",
+  "category": "grading",
+  "tags": ["grading", "self-assessment", "metacognitive", "penalty-formula"],
+  "dependencies": {
+    "python": ">=3.7",
+    "packages": ["openpyxl", "PyPDF2"]
+  },
+  "inputs": {
+    "excel_path": {
+      "type": "string",
+      "description": "Path to Excel grading summary",
+      "required": true,
+      "default": "../../Assignment3_Grading_Summary.xlsx"
+    },
+    "submissions_dir": {
+      "type": "string",
+      "description": "Path to student submissions directory",
+      "required": true,
+      "default": "../../WorkSubmissions01"
+    },
+    "output_path": {
+      "type": "string",
+      "description": "Output Excel file path (optional)",
+      "required": false
+    }
+  },
+  "outputs": {
+    "excel_file": {
+      "type": "file",
+      "description": "Updated Excel with weighted grades"
+    },
+    "backup_file": {
+      "type": "file",
+      "description": "Backup of original Excel"
+    },
+    "summary_report": {
+      "type": "text",
+      "description": "Statistical summary of calculations"
+    }
+  },
+  "examples": [
+    {
+      "name": "Process all students",
+      "command": "python calculate_weighted_grades.py --excel ../../Assignment3_Grading_Summary.xlsx --submissions ../../WorkSubmissions01"
+    },
+    {
+      "name": "Test single student",
+      "command": "python calculate_single_weighted.py --self-grade 85 --base-grade 85"
+    }
+  ]
+}
