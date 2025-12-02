@@ -1,0 +1,32 @@
+{
+  "name": "pdf-merger",
+  "version": "1.0.0",
+  "description": "Merge student submission PDF with their grade report PDF into a single combined PDF file. Creates complete student packages for archival.",
+  "author": "RuniGrader",
+  "type": "claude-cli-skill",
+  "category": "grading",
+  "tags": ["pdf", "merge", "combine", "grading", "reports"],
+  "prompt": "prompt.md",
+  "dependencies": {
+    "python": ">=3.7",
+    "packages": ["PyPDF2"]
+  },
+  "capabilities": [
+    "Find student submission PDF and grade report PDF",
+    "Merge PDFs in correct order (submission first, grade report second)",
+    "Create combined PDF with descriptive filename",
+    "Process single student or batch process all students",
+    "Generate summary statistics"
+  ],
+  "usage": {
+    "invoke": "/pdf-merger",
+    "description": "Invoke as Claude CLI skill to merge student submission PDFs with grade reports"
+  },
+  "examples": [
+    {
+      "name": "Merge all students",
+      "command": "/pdf-merger",
+      "description": "Interactive mode - Claude will ask for submissions directory and process all students"
+    }
+  ]
+}
