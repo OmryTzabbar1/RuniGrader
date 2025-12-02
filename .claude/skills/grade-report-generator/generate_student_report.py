@@ -91,7 +91,7 @@ def get_feedback_tone(grade):
             'adjective': 'insufficient'
         }
 
-def create_student_report(output_path, student_id, team, grade, repository, strengths, improvements, assignment="Assignment 3"):
+def create_student_report(output_path, student_id, team, grade, repository, strengths, improvements, assignment="Assignment 1"):
     """Create student-facing PDF grade report."""
 
     doc = SimpleDocTemplate(
@@ -347,7 +347,7 @@ def main():
     parser.add_argument('--output-dir', required=True, help='Output directory for PDF')
     parser.add_argument('--strengths', default='', help='Pipe-separated list of strengths')
     parser.add_argument('--improvements', default='', help='Pipe-separated list of improvements')
-    parser.add_argument('--assignment', default='Assignment 3', help='Assignment name')
+    parser.add_argument('--assignment', default='Assignment 1', help='Assignment name')
 
     args = parser.parse_args()
 

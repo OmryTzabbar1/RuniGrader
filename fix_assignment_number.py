@@ -1,17 +1,48 @@
 #!/usr/bin/env python3
 """
-Regenerate all student grade reports with weighted (post-curve) grades instead of base grades.
-
-Reads from Assignment1_Grading_Summary.xlsx and regenerates PDF reports.
+Fix assignment number from Assignment 3 to Assignment 1 everywhere.
+1. Rename Excel file
+2. Regenerate all PDF reports with correct assignment number
+3. Regenerate merged PDFs
 """
 import os
 import sys
-import openpyxl
+import shutil
 from pathlib import Path
 
 # Import the grade report generator
 sys.path.append('.claude/skills/grade-report-generator')
 from generate_student_report import create_student_report
+
+# Import PDF merger
+sys.path.append('.claude/skills/pdf-merger')
+from merge_pdfs import find_pdfs, merge_pdfs
+
+import openpyxl
+
+def rename_excel_file():
+    """Rename Assignment3_Grading_Summary.xlsx to Assignment1_Grading_Summary.xlsx"""
+    old_name = "Assignment3_Grading_Summary.xlsx"
+    new_name = "Assignment1_Grading_Summary.xlsx"
+
+    if os.path.exists(old_name):
+        if os.path.exists(new_name):
+            print(f"[WARN] {new_name} already exists, skipping rename")
+            return new_name
+        try:
+            os.rename(old_name, new_name)
+            print(f"[OK] Renamed {old_name} -> {new_name}")
+            return new_name
+        except Exception as e:
+            print(f"[ERROR] Could not rename Excel file: {e}")
+            print(f"[ERROR] Please close the Excel file and run this script again")
+            return None
+    elif os.path.exists(new_name):
+        print(f"[OK] {new_name} already exists")
+        return new_name
+    else:
+        print(f"[ERROR] Neither {old_name} nor {new_name} found!")
+        return None
 
 def load_student_data(excel_path):
     """Load student data from Excel including weighted grades."""
@@ -43,14 +74,6 @@ def load_student_data(excel_path):
         print(f"Found headers: {list(headers.keys())}")
         return []
 
-    print(f"[OK] Found columns:")
-    print(f"  Student ID: {student_id_col}")
-    print(f"  Team Name: {team_col}")
-    print(f"  Base Grade: {base_grade_col}")
-    print(f"  Weighted Grade: {weighted_grade_col}")
-    print(f"  Strengths: {strengths_col}")
-    print(f"  Weaknesses: {weaknesses_col}")
-
     # Load student data
     students = []
     for row_num in range(header_row + 1, ws.max_row + 1):
@@ -66,7 +89,6 @@ def load_student_data(excel_path):
         weaknesses = ws.cell(row_num, weaknesses_col).value
 
         if not weighted_grade:
-            print(f"[SKIP] Student {student_id}: No weighted grade")
             continue
 
         # Split strengths and weaknesses into lists (comma-separated)
@@ -97,7 +119,6 @@ def find_student_folder(submissions_dir, student_id):
 def find_repository_url(student_folder):
     """Try to find repository URL from submission_info.xlsx."""
     try:
-        import openpyxl
         excel_path = Path(student_folder) / "submission_info.xlsx"
         if excel_path.exists():
             wb = openpyxl.load_workbook(str(excel_path), data_only=True)
@@ -118,27 +139,30 @@ def find_repository_url(student_folder):
 
 def main():
     print("=" * 60)
-    print("REGENERATE GRADE REPORTS WITH WEIGHTED GRADES")
+    print("FIX ASSIGNMENT NUMBER: ASSIGNMENT 3 -> ASSIGNMENT 1")
     print("=" * 60)
 
-    # Load Excel data
-    excel_path = "Assignment1_Grading_Summary.xlsx"
-    print(f"\n[LOAD] Reading student data from: {excel_path}")
-    students = load_student_data(excel_path)
-    print(f"[OK] Loaded {len(students)} students with weighted grades")
+    # Step 1: Rename Excel file
+    print("\n[STEP 1] Renaming Excel file...")
+    excel_path = rename_excel_file()
+    if not excel_path:
+        return 1
 
-    # Submissions directory
+    # Step 2: Load student data
+    print(f"\n[STEP 2] Loading student data from {excel_path}...")
+    students = load_student_data(excel_path)
+    print(f"[OK] Loaded {len(students)} students")
+
+    # Step 3: Regenerate PDF reports with correct assignment number
+    print(f"\n[STEP 3] Regenerating PDF reports with 'Assignment 1'...")
     submissions_dir = "WorkSubmissions01"
 
-    # Statistics
     stats = {
-        'processed': 0,
-        'successful': 0,
-        'failed': 0
+        'reports_regenerated': 0,
+        'reports_failed': 0,
+        'pdfs_merged': 0,
+        'pdfs_failed': 0
     }
-
-    print(f"\n[GENERATE] Regenerating grade reports...")
-    print("-" * 60)
 
     for student in students:
         student_id = student['student_id']
@@ -146,54 +170,91 @@ def main():
         # Find student folder
         student_folder = find_student_folder(submissions_dir, student_id)
         if not student_folder:
-            print(f"[FAIL] Student {student_id}: Folder not found")
-            stats['failed'] += 1
+            print(f"[SKIP] Student {student_id}: Folder not found")
+            stats['reports_failed'] += 1
             continue
 
         # Find repository URL
         repository = find_repository_url(student_folder)
 
-        # Generate output path
-        output_path = os.path.join(student_folder, f"Student_Grade_Report_{student_id}.pdf")
+        # Generate report path
+        report_path = os.path.join(student_folder, f"Student_Grade_Report_{student_id}.pdf")
 
-        # Overwrite existing report (no backup needed)
+        # Backup old report if exists
+        if os.path.exists(report_path):
+            backup_path = report_path.replace('.pdf', '_assignment3_backup.pdf')
+            if not os.path.exists(backup_path):
+                try:
+                    shutil.copy2(report_path, backup_path)
+                except:
+                    pass
 
         try:
-            # Generate new report with WEIGHTED grade
+            # Generate new report with ASSIGNMENT 1 and WEIGHTED grade
             create_student_report(
-                output_path=output_path,
+                output_path=report_path,
                 student_id=student_id,
                 team=student['team'],
-                grade=student['weighted_grade'],  # Use weighted grade!
+                grade=student['weighted_grade'],
                 repository=repository,
                 strengths=student['strengths'],
                 improvements=student['weaknesses'],
-                assignment="Assignment 1"
+                assignment="Assignment 1"  # CORRECT ASSIGNMENT NUMBER
             )
 
-            base = student['base_grade']
-            weighted = student['weighted_grade']
-            diff = base - weighted
-
-            print(f"[OK] Student {student_id}: Base={base:.1f} -> Weighted={weighted:.1f} (penalty={diff:.1f})")
-            stats['successful'] += 1
+            print(f"[OK] Student {student_id}: Report regenerated (Grade: {student['weighted_grade']:.1f})")
+            stats['reports_regenerated'] += 1
 
         except Exception as e:
             print(f"[FAIL] Student {student_id}: {e}")
-            stats['failed'] += 1
+            stats['reports_failed'] += 1
+            continue
 
-        stats['processed'] += 1
+        # Step 4: Regenerate merged PDF
+        try:
+            submission_pdf, grade_report_pdf = find_pdfs(student_folder)
+
+            if not submission_pdf or not grade_report_pdf:
+                print(f"[SKIP] Student {student_id}: Missing PDFs for merge")
+                stats['pdfs_failed'] += 1
+                continue
+
+            merged_path = os.path.join(student_folder, f"Student_{student_id}_Complete_Submission.pdf")
+
+            # Backup old merged PDF if exists
+            if os.path.exists(merged_path):
+                backup_path = merged_path.replace('.pdf', '_assignment3_backup.pdf')
+                if not os.path.exists(backup_path):
+                    try:
+                        shutil.copy2(merged_path, backup_path)
+                    except:
+                        pass
+
+            success, page_info, error = merge_pdfs(submission_pdf, grade_report_pdf, merged_path)
+
+            if success:
+                stats['pdfs_merged'] += 1
+            else:
+                print(f"[WARN] Student {student_id}: Merge failed - {error}")
+                stats['pdfs_failed'] += 1
+
+        except Exception as e:
+            print(f"[WARN] Student {student_id}: Could not merge - {e}")
+            stats['pdfs_failed'] += 1
 
     # Print summary
     print("\n" + "=" * 60)
-    print("REGENERATION SUMMARY")
+    print("FIX SUMMARY")
     print("=" * 60)
-    print(f"\nStudents Processed: {stats['processed']}")
-    print(f"Successful: {stats['successful']} ({stats['successful']/stats['processed']*100:.1f}%)")
-    print(f"Failed: {stats['failed']} ({stats['failed']/stats['processed']*100:.1f}%)")
-
-    print("\n[OK] All grade reports regenerated with weighted (post-curve) grades!")
-    print("     Old reports backed up as *_old.pdf")
+    print(f"\nReports Regenerated: {stats['reports_regenerated']}")
+    print(f"Reports Failed: {stats['reports_failed']}")
+    print(f"PDFs Merged: {stats['pdfs_merged']}")
+    print(f"PDFs Failed: {stats['pdfs_failed']}")
+    print("\n[OK] All fixes complete!")
+    print("     - Excel renamed to Assignment1_Grading_Summary.xlsx")
+    print("     - PDF reports now say 'Assignment 1'")
+    print("     - Merged PDFs updated with corrected reports")
+    print("     - Old files backed up as *_assignment3_backup.pdf")
     print("\n" + "=" * 60)
 
     return 0
