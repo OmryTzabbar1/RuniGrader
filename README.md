@@ -62,14 +62,18 @@ open Assignment3_Grading_Summary.xlsx
 RuniGrader is a complete automated grading pipeline that:
 - **Assesses** student code repositories across 10 software engineering dimensions
 - **Generates** professional PDF grade reports with personalized feedback
-- **Tracks** all grades in comprehensive Excel spreadsheets
+- **Tracks** all grades in comprehensive Excel spreadsheets with weighted grading
+- **Applies** exponential penalty formula for metacognitive self-assessment
 - **Archives** all student submissions and grading artifacts
 
 ### Key Statistics (Assignment 3)
 - **Students Graded:** 46
-- **Pass Rate:** 94.4% (43/46)
-- **Highest Score:** 94/100 (Participants 38981, 38958, 59378)
-- **Average Grade:** ~73/100
+- **Pass Rate (Base Grades):** 94.4% (43/46)
+- **Highest Base Score:** 94/100 (Participants 38981, 38958, 59378)
+- **Average Base Grade:** 72.61/100
+- **Average Weighted Grade:** 54.41/100 (after self-assessment penalties)
+- **Average Penalty:** 18.52 points (students overestimated their work)
+- **Perfect Self-Assessors:** 10 students (21.7% - no penalty applied)
 
 ---
 
@@ -280,17 +284,19 @@ python create_grading_excel.py
 3. Team Name
 4. Estimated Grade (from .md)
 5. TRUE/FALSE Score
-6. Generated Grade (/100)
-7. Weighted Grade (manual entry)
-8. Assessment Date (manual entry)
-9. Key Strengths
-10. Key Weaknesses
+6. Generated Grade (/100) - Base grade from Tier 2 assessment
+7. Self-Grade - Student's self-proclaimed grade from submission_info.xlsx
+8. Weighted Grade - Final grade after exponential penalty formula
+9. Assessment Date
+10. Key Strengths
+11. Key Weaknesses
 
 **Features:**
-- Color-coded grades (green=A, blue=B, yellow=C, orange=D, red=F)
+- Color-coded grades (green=A, light green=B, yellow=C, orange=D, red=F)
 - Auto-calculated statistics (average, pass rate, grade distribution)
 - Frozen header row
-- Yellow-highlighted fields for manual data entry
+- Exponential penalty formula for metacognitive assessment
+- Self-grade extraction from student submissions
 
 ---
 
@@ -301,7 +307,9 @@ python create_grading_excel.py
 Each skill is worth **10 points** (100 total):
 
 ```
-Total Grade = Skill1 + Skill2 + ... + Skill10
+Base Grade = Skill1 + Skill2 + ... + Skill10
+
+Weighted Grade = Base Grade - Penalty (if student overestimated)
 
 Passing: 60/100
 Excellent: 90-100
@@ -311,20 +319,54 @@ Passing: 60-69
 Failing: <60
 ```
 
-### Tier 2 Assessment Workflow
+### Tier 2 Assessment Workflow with Weighted Grading
 
 ```mermaid
 flowchart TD
     A[Student Submission] --> B[Clone Repository]
     B --> C[Run Skill 1-10 Assessments]
-    C --> D[Calculate Total Score]
-    D --> E{Score ≥ 60?}
-    E -->|Yes| F[Generate PASS PDF]
-    E -->|No| G[Generate FAIL PDF]
-    F --> H[Update Excel Summary]
-    G --> H
-    H --> I[Archive Results]
+    C --> D[Calculate Base Grade]
+    D --> E[Extract Self-Grade from submission_info.xlsx]
+    E --> F[Apply Exponential Penalty Formula]
+    F --> G[Calculate Weighted Grade]
+    G --> H{Score ≥ 60?}
+    H -->|Yes| I[Generate PASS PDF]
+    H -->|No| J[Generate FAIL PDF]
+    I --> K[Update Excel Summary]
+    J --> K
+    K --> L[Archive Results]
 ```
+
+### Weighted Grading Formula (Metacognitive Assessment)
+
+The system applies an **exponential penalty** for students who overestimate their work:
+
+```python
+# Step 1: Calculate scale multiplier (risk increases with higher claims)
+scale = 0.086603 × e^(0.027465 × self_grade)
+
+# Step 2: Apply penalty if overestimated
+if self_grade > base_grade:
+    penalty = (self_grade - base_grade) × scale
+    weighted_grade = max(0, base_grade - penalty)
+else:
+    # Reward humility/accuracy - no penalty
+    weighted_grade = base_grade
+```
+
+**Design Philosophy:**
+- **Rewards humility:** Students who underestimate get full credit
+- **Rewards accuracy:** No penalty for accurate self-assessment
+- **Penalizes overconfidence:** Higher claims = exponentially higher risk
+- **Fair to all:** Missing self-grade = no penalty (defaults to base grade)
+
+**Example Outcomes:**
+| Self-Grade | Base Grade | Penalty | Weighted | Result |
+|------------|------------|---------|----------|--------|
+| 85 | 85 | 0.00 | 85.00 | ✓ Accurate |
+| 95 | 94 | -1.18 | 92.82 | ✓ Nearly Perfect |
+| 100 | 87 | -17.55 | 69.45 | ⚠️ Overconfident |
+| 100 | 55 | -60.75 | 0.00 | ❌ Very Overconfident |
 
 ### Detailed Skill Breakdown
 

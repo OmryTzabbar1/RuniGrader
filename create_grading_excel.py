@@ -36,6 +36,7 @@ headers = [
     "Estimated Grade\n(from .md)",
     "TRUE/FALSE\nScore",
     "Generated\nGrade (/100)",
+    "Self-Grade",
     "Weighted\nGrade",
     "Assessment\nDate",
     "Key Strengths",
@@ -52,7 +53,7 @@ for col_num, header in enumerate(headers, 1):
     cell.border = thin_border
 
 # Set column widths
-column_widths = [12, 15, 25, 12, 12, 12, 12, 12, 50, 50]
+column_widths = [12, 15, 25, 12, 12, 12, 12, 12, 12, 50, 50]
 for i, width in enumerate(column_widths, 1):
     ws.column_dimensions[get_column_letter(i)].width = width
 
@@ -158,13 +159,18 @@ for row_num, student in enumerate(all_students, 2):
     ws.cell(row=row_num, column=8).border = thin_border
     ws.cell(row=row_num, column=8).fill = yellow_fill
 
-    ws.cell(row=row_num, column=9).value = student['strengths']
-    ws.cell(row=row_num, column=9).alignment = left_align
+    ws.cell(row=row_num, column=9).value = ""
+    ws.cell(row=row_num, column=9).alignment = center_align
     ws.cell(row=row_num, column=9).border = thin_border
+    ws.cell(row=row_num, column=9).fill = yellow_fill
 
-    ws.cell(row=row_num, column=10).value = student['weaknesses']
+    ws.cell(row=row_num, column=10).value = student['strengths']
     ws.cell(row=row_num, column=10).alignment = left_align
     ws.cell(row=row_num, column=10).border = thin_border
+
+    ws.cell(row=row_num, column=11).value = student['weaknesses']
+    ws.cell(row=row_num, column=11).alignment = left_align
+    ws.cell(row=row_num, column=11).border = thin_border
 
 # Freeze top row
 ws.freeze_panes = "A2"
