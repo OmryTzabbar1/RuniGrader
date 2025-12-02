@@ -1,56 +1,52 @@
 {
   "name": "weighted-grade-calculator",
   "version": "1.0.0",
-  "description": "Calculate weighted grades using exponential self-grading penalty formula",
+  "description": "Calculate weighted grades using exponential self-grading penalty formula. Claude CLI skill that extracts self-grades from PDFs and applies metacognitive assessment.",
   "author": "RuniGrader",
-  "main": "calculate_weighted_grades.py",
+  "type": "claude-cli-skill",
   "category": "grading",
-  "tags": ["grading", "self-assessment", "metacognitive", "penalty-formula"],
+  "tags": ["grading", "self-assessment", "metacognitive", "penalty-formula", "excel", "pdf-extraction"],
+  "prompt": "prompt.md",
+  "helperScripts": {
+    "batch": "calculate_weighted_grades.py",
+    "single": "calculate_single_weighted.py"
+  },
   "dependencies": {
     "python": ">=3.7",
     "packages": ["openpyxl", "PyPDF2"]
   },
-  "inputs": {
-    "excel_path": {
-      "type": "string",
-      "description": "Path to Excel grading summary",
-      "required": true,
-      "default": "../../Assignment3_Grading_Summary.xlsx"
-    },
-    "submissions_dir": {
-      "type": "string",
-      "description": "Path to student submissions directory",
-      "required": true,
-      "default": "../../WorkSubmissions01"
-    },
-    "output_path": {
-      "type": "string",
-      "description": "Output Excel file path (optional)",
-      "required": false
-    }
+  "capabilities": [
+    "Extract self-proclaimed grades from student PDFs",
+    "Calculate exponential penalty for overconfidence",
+    "Reward accurate and humble self-assessment",
+    "Update Excel with Self-Grade, Penalty, and Weighted Grade columns",
+    "Generate statistical summary reports",
+    "Create automatic backups before modification"
+  ],
+  "formula": {
+    "step1": "scale = 0.086603 × e^(0.027465 × self_grade)",
+    "step2": "penalty = (self_grade - base_grade) × scale (if overestimated)",
+    "step3": "weighted_grade = max(0, base_grade - penalty)"
   },
-  "outputs": {
-    "excel_file": {
-      "type": "file",
-      "description": "Updated Excel with weighted grades"
-    },
-    "backup_file": {
-      "type": "file",
-      "description": "Backup of original Excel"
-    },
-    "summary_report": {
-      "type": "text",
-      "description": "Statistical summary of calculations"
-    }
+  "usage": {
+    "invoke": "/weighted-grade-calculator",
+    "description": "Invoke as Claude CLI skill to process all students interactively"
   },
   "examples": [
     {
-      "name": "Process all students",
-      "command": "python calculate_weighted_grades.py --excel ../../Assignment3_Grading_Summary.xlsx --submissions ../../WorkSubmissions01"
+      "name": "Process all students (CLI skill)",
+      "command": "/weighted-grade-calculator",
+      "description": "Interactive mode - Claude will ask for Excel and submissions paths"
     },
     {
-      "name": "Test single student",
-      "command": "python calculate_single_weighted.py --self-grade 85 --base-grade 85"
+      "name": "Process all students (Python script)",
+      "command": "python calculate_weighted_grades.py --excel ../../Assignment3_Grading_Summary.xlsx --submissions ../../WorkSubmissions01",
+      "description": "Direct script execution for automation"
+    },
+    {
+      "name": "Test single student calculation",
+      "command": "python calculate_single_weighted.py --self-grade 95 --base-grade 85",
+      "description": "Quick test of formula with specific values"
     }
   ]
 }
