@@ -55,6 +55,15 @@ SKIP_PATTERNS = [
     r'package-lock\.json$',
     r'yarn\.lock$',
     r'\.min\.js$',
+    # Skip test files - they commonly have hardcoded test credentials
+    r'test_.*\.py$',
+    r'.*_test\.py$',
+    r'test\.py$',
+    r'tests?/',
+    r'spec\.js$',
+    r'.*\.spec\.js$',
+    r'.*\.test\.js$',
+    r'__tests__/',
 ]
 
 # File extensions to scan
@@ -129,7 +138,12 @@ def scan_repository(repo_path):
 
         for filename in files:
             filepath = os.path.join(root, filename)
-            rel_path = os.path.relpath(filepath, repo_path)
+
+            try:
+                rel_path = os.path.relpath(filepath, repo_path)
+            except ValueError:
+                # Skip files that cause path issues (e.g., different mount points)
+                continue
 
             if should_skip(rel_path):
                 continue
@@ -174,6 +188,8 @@ def check_env_files(repo_path):
 
     # Check if code uses environment variables
     env_var_count = 0
+    env_documented_in_readme = False
+
     for root, dirs, files in os.walk(repo_path):
         dirs[:] = [d for d in dirs if not d.startswith('.') and d not in ['node_modules', '__pycache__', 'venv']]
 
@@ -187,8 +203,26 @@ def check_env_files(repo_path):
                 except:
                     pass
 
-    checks['uses_environment_variables'] = env_var_count > 0
+    # Check for environment variable documentation in README
+    readme_paths = ['README.md', 'readme.md', 'Readme.md', 'README.MD']
+    for readme_name in readme_paths:
+        readme_path = os.path.join(repo_path, readme_name)
+        if os.path.exists(readme_path):
+            try:
+                with open(readme_path, 'r', encoding='utf-8', errors='ignore') as f:
+                    content = f.read().lower()
+                    # Check for environment variable mentions
+                    env_keywords = ['environment variable', 'env variable', '.env', 'api_key', 'api key',
+                                   'configuration', 'config', 'export ', 'set ', 'getenv', 'process.env']
+                    if any(keyword in content for keyword in env_keywords):
+                        env_documented_in_readme = True
+                        break
+            except:
+                pass
+
+    checks['uses_environment_variables'] = env_var_count > 0 or env_documented_in_readme
     checks['env_var_usage_count'] = env_var_count
+    checks['env_documented_in_readme'] = env_documented_in_readme
 
     return checks
 

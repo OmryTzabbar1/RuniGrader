@@ -1,0 +1,29 @@
+{
+  "name": "excel-grade-exporter",
+  "version": "1.0.0",
+  "description": "Export assessment grades to Moodle-compatible Excel format with weighted grade calculations",
+  "author": "RuniGrader Team",
+  "created": "2025-12-02",
+  "type": "export",
+  "capabilities": [
+    "Moodle CSV format generation",
+    "Weighted grade calculation",
+    "Grade comparison analysis",
+    "Feedback extraction",
+    "Color-coded Excel output"
+  ],
+  "dependencies": [
+    "openpyxl",
+    "PyPDF2"
+  ],
+  "inputs": {
+    "assessment_jsons": "assessments_tier2_assignment{N}/*.json",
+    "submission_dir": "WorkSubmissions0{N}/",
+    "assignment_number": "integer"
+  },
+  "outputs": {
+    "moodle_excel": "Assignment{N}_Moodle_Grades.xlsx",
+    "comparison_excel": "Assignment{N}_Grade_Comparison.xlsx"
+  },
+  "usage": "python .claude/skills/excel-grade-exporter/export_grades.py <assignment_number>"
+}
