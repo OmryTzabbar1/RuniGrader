@@ -196,20 +196,35 @@ def create_comparison_excel(assessments: dict, weighted_grades: dict, assignment
 
         ws.append(row)
 
-        # Color-code weighted grade
         row_num = ws.max_row
-        grade_cell = ws.cell(row=row_num, column=3)
+
+        # Color-code calculated grade (column B)
+        calculated_cell = ws.cell(row=row_num, column=2)
+
+        if calculated_grade >= 90:
+            calculated_cell.fill = PatternFill(start_color="C6EFCE", end_color="C6EFCE", fill_type="solid")
+        elif calculated_grade >= 80:
+            calculated_cell.fill = PatternFill(start_color="C6E0B4", end_color="C6E0B4", fill_type="solid")
+        elif calculated_grade >= 70:
+            calculated_cell.fill = PatternFill(start_color="FFEB9C", end_color="FFEB9C", fill_type="solid")
+        elif calculated_grade >= 60:
+            calculated_cell.fill = PatternFill(start_color="FFC7CE", end_color="FFC7CE", fill_type="solid")
+        else:
+            calculated_cell.fill = PatternFill(start_color="FF6B6B", end_color="FF6B6B", fill_type="solid")
+
+        # Color-code weighted grade (column C)
+        weighted_cell = ws.cell(row=row_num, column=3)
 
         if weighted_grade >= 90:
-            grade_cell.fill = PatternFill(start_color="C6EFCE", end_color="C6EFCE", fill_type="solid")
+            weighted_cell.fill = PatternFill(start_color="C6EFCE", end_color="C6EFCE", fill_type="solid")
         elif weighted_grade >= 80:
-            grade_cell.fill = PatternFill(start_color="C6E0B4", end_color="C6E0B4", fill_type="solid")
+            weighted_cell.fill = PatternFill(start_color="C6E0B4", end_color="C6E0B4", fill_type="solid")
         elif weighted_grade >= 70:
-            grade_cell.fill = PatternFill(start_color="FFEB9C", end_color="FFEB9C", fill_type="solid")
+            weighted_cell.fill = PatternFill(start_color="FFEB9C", end_color="FFEB9C", fill_type="solid")
         elif weighted_grade >= 60:
-            grade_cell.fill = PatternFill(start_color="FFC7CE", end_color="FFC7CE", fill_type="solid")
+            weighted_cell.fill = PatternFill(start_color="FFC7CE", end_color="FFC7CE", fill_type="solid")
         else:
-            grade_cell.fill = PatternFill(start_color="FF6B6B", end_color="FF6B6B", fill_type="solid")
+            weighted_cell.fill = PatternFill(start_color="FF6B6B", end_color="FF6B6B", fill_type="solid")
 
         # Color-code difference
         diff_cell = ws.cell(row=row_num, column=4)

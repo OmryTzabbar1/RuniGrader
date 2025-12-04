@@ -26,3 +26,26 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Student cloned repositories (exclude from tracking)
+WorkSubmissions01/*/LLM_course/
+WorkSubmissions01/*/local-llm-chat/
+WorkSubmissions01/*/agno-ollama-chatbot/
+WorkSubmissions01/*/MultiAgentCourse/
+WorkSubmissions01/*/llm-desktop-chat/
+WorkSubmissions01/*/LLM_Agent_Orchestration_HW1/
+WorkSubmissions01/*/my-chat/
+WorkSubmissions03/*/LLMs-and-Multi-Agent-Orchestration---Assignment3/
+WorkSubmissions03/*/llms-and-multi-agent-orchestration/
+WorkSubmissions03/*/Assignment_3_Agentic-Turing-Machine-Development_-CLI-/
+
+# Temporary Python scripts
+add_missing_students.py
+check_excel_structure.py
+extract_assignment3_grades.py
+find_updated_students.py
+update_assignment3_grades.py
+WorkSubmissions03/parse_urls.py
+
+# Windows reserved filename
+nul
