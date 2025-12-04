@@ -52,12 +52,21 @@ def assess_extensibility(repo_path):
 
     # Check for plugin/extension system (3 points)
     plugin_dirs = data.get("plugin_directories", [])
+    ext_docs = data.get("extensibility_docs", [])
+    doc_quality = data.get("doc_quality", {})
     plugin_score = 0.0
 
     if len(plugin_dirs) > 0:
+        # Actual plugin directories exist
         plugin_score = 3.0
         score += 3.0
         notes.append(f"Plugin/extension system found: {', '.join(plugin_dirs[:3])}")
+    elif len(ext_docs) > 0 and doc_quality.get("has_extension_points", False):
+        # No actual plugin dirs, but documented how to create plugins
+        plugin_score = 1.0
+        score += 1.0
+        notes.append("Plugin architecture documented but not implemented")
+        recommendations.append("Implement actual plugin/extension system (+2.0 points)")
     else:
         recommendations.append("Create plugin/extension system for modularity (+3.0 points)")
 
