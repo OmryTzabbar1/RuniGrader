@@ -1,0 +1,517 @@
+{
+  "skill": "submission-info-updater",
+  "assignment": "Assignment 3",
+  "assignment_dir": "C:\\Users\\Guest1\\CoOp\\Runi\\WorkSubmissions03",
+  "processed_date": "2025-12-04T03:32:45.699841",
+  "total_students": 35,
+  "grades_found": 35,
+  "grades_missing": 0,
+  "excel_updated": 35,
+  "errors": 0,
+  "success_rate": "100.0%",
+  "students_processed": [
+    {
+      "participant_id": "63684",
+      "folder": "C:\\Users\\Guest1\\CoOp\\Runi\\WorkSubmissions03\\Participant_63684_assignsubmission_file",
+      "pdf_found": "HW3_Lior_Abuhav_Ofri_Kutchinsky.pdf",
+      "self_grade_extracted": 94,
+      "excel_updated": true,
+      "error": null,
+      "notes": [
+        "Found PDF: HW3_Lior_Abuhav_Ofri_Kutchinsky.pdf",
+        "Extracted 3252 characters of text",
+        "Extracted grade: 94",
+        "Successfully updated submission_info.xlsx"
+      ]
+    },
+    {
+      "participant_id": "63685",
+      "folder": "C:\\Users\\Guest1\\CoOp\\Runi\\WorkSubmissions03\\Participant_63685_assignsubmission_file",
+      "pdf_found": "Assignment 3 PDF LLM.pdf",
+      "self_grade_extracted": 94,
+      "excel_updated": true,
+      "error": null,
+      "notes": [
+        "Found PDF: Assignment 3 PDF LLM.pdf",
+        "Extracted 265 characters of text",
+        "Extracted grade: 94",
+        "Successfully updated submission_info.xlsx"
+      ]
+    },
+    {
+      "participant_id": "63687",
+      "folder": "C:\\Users\\Guest1\\CoOp\\Runi\\WorkSubmissions03\\Participant_63687_assignsubmission_file",
+      "pdf_found": "exercise_03.pdf",
+      "self_grade_extracted": 96,
+      "excel_updated": true,
+      "error": null,
+      "notes": [
+        "Found PDF: exercise_03.pdf",
+        "Extracted 199 characters of text",
+        "Extracted grade: 96",
+        "Successfully updated submission_info.xlsx"
+      ]
+    },
+    {
+      "participant_id": "63688",
+      "folder": "C:\\Users\\Guest1\\CoOp\\Runi\\WorkSubmissions03\\Participant_63688_assignsubmission_file",
+      "pdf_found": "hw3 llm agents.pdf",
+      "self_grade_extracted": 100,
+      "excel_updated": true,
+      "error": null,
+      "notes": [
+        "Found PDF: hw3 llm agents.pdf",
+        "Extracted 253 characters of text",
+        "Extracted grade: 100",
+        "Successfully updated submission_info.xlsx"
+      ]
+    },
+    {
+      "participant_id": "63689",
+      "folder": "C:\\Users\\Guest1\\CoOp\\Runi\\WorkSubmissions03\\Participant_63689_assignsubmission_file",
+      "pdf_found": "Hw3_The_Surfers_209361864_021387121.pdf",
+      "self_grade_extracted": 95,
+      "excel_updated": true,
+      "error": null,
+      "notes": [
+        "Found PDF: Hw3_The_Surfers_209361864_021387121.pdf",
+        "Extracted 153 characters of text",
+        "Extracted grade: 95",
+        "Successfully updated submission_info.xlsx"
+      ]
+    },
+    {
+      "participant_id": "63690",
+      "folder": "C:\\Users\\Guest1\\CoOp\\Runi\\WorkSubmissions03\\Participant_63690_assignsubmission_file",
+      "pdf_found": "מטלה 3 אריאל נפדנסקי ואבי פרדמן .pdf",
+      "self_grade_extracted": 95,
+      "excel_updated": true,
+      "error": null,
+      "notes": [
+        "Found PDF: מטלה 3 אריאל נפדנסקי ואבי פרדמן .pdf",
+        "Extracted 6185 characters of text",
+        "Extracted grade: 95",
+        "Successfully updated submission_info.xlsx"
+      ]
+    },
+    {
+      "participant_id": "63691",
+      "folder": "C:\\Users\\Guest1\\CoOp\\Runi\\WorkSubmissions03\\Participant_63691_assignsubmission_file",
+      "pdf_found": "הגשת מטלה 3 - טל ברדה.pdf",
+      "self_grade_extracted": 92,
+      "excel_updated": true,
+      "error": null,
+      "notes": [
+        "Found PDF: הגשת מטלה 3 - טל ברדה.pdf",
+        "Extracted 419 characters of text",
+        "Extracted grade: 92",
+        "Successfully updated submission_info.xlsx"
+      ]
+    },
+    {
+      "participant_id": "63692",
+      "folder": "C:\\Users\\Guest1\\CoOp\\Runi\\WorkSubmissions03\\Participant_63692_assignsubmission_file",
+      "pdf_found": "ex3_bar_eldad.pdf",
+      "self_grade_extracted": 100,
+      "excel_updated": true,
+      "error": null,
+      "notes": [
+        "Found PDF: ex3_bar_eldad.pdf",
+        "Extracted 6206 characters of text",
+        "Extracted grade: 100",
+        "Successfully updated submission_info.xlsx"
+      ]
+    },
+    {
+      "participant_id": "63693",
+      "folder": "C:\\Users\\Guest1\\CoOp\\Runi\\WorkSubmissions03\\Participant_63693_assignsubmission_file",
+      "pdf_found": "מטלה 3.pdf",
+      "self_grade_extracted": 100,
+      "excel_updated": true,
+      "error": null,
+      "notes": [
+        "Found PDF: מטלה 3.pdf",
+        "Extracted 267 characters of text",
+        "Extracted grade: 100",
+        "Successfully updated submission_info.xlsx"
+      ]
+    },
+    {
+      "participant_id": "63695",
+      "folder": "C:\\Users\\Guest1\\CoOp\\Runi\\WorkSubmissions03\\Participant_63695_assignsubmission_file",
+      "pdf_found": "Circular-translation-analysis.pdf",
+      "self_grade_extracted": 88,
+      "excel_updated": true,
+      "error": null,
+      "notes": [
+        "Found PDF: Circular-translation-analysis.pdf",
+        "Extracted 1494 characters of text",
+        "Extracted grade: 88",
+        "Successfully updated submission_info.xlsx"
+      ]
+    },
+    {
+      "participant_id": "63696",
+      "folder": "C:\\Users\\Guest1\\CoOp\\Runi\\WorkSubmissions03\\Participant_63696_assignsubmission_file",
+      "pdf_found": "Promptopia - HW3.pdf",
+      "self_grade_extracted": 95,
+      "excel_updated": true,
+      "error": null,
+      "notes": [
+        "Found PDF: Promptopia - HW3.pdf",
+        "Extracted 2197 characters of text",
+        "Extracted grade: 95",
+        "Successfully updated submission_info.xlsx"
+      ]
+    },
+    {
+      "participant_id": "63697",
+      "folder": "C:\\Users\\Guest1\\CoOp\\Runi\\WorkSubmissions03\\Participant_63697_assignsubmission_file",
+      "pdf_found": "Assignment3_Cover_Page.pdf",
+      "self_grade_extracted": 95,
+      "excel_updated": true,
+      "error": null,
+      "notes": [
+        "Found PDF: Assignment3_Cover_Page.pdf",
+        "Extracted 7700 characters of text",
+        "Extracted grade: 95",
+        "Successfully updated submission_info.xlsx"
+      ]
+    },
+    {
+      "participant_id": "63698",
+      "folder": "C:\\Users\\Guest1\\CoOp\\Runi\\WorkSubmissions03\\Participant_63698_assignsubmission_file",
+      "pdf_found": "Llms third project.pdf",
+      "self_grade_extracted": 97,
+      "excel_updated": true,
+      "error": null,
+      "notes": [
+        "Found PDF: Llms third project.pdf",
+        "Extracted 180 characters of text",
+        "Extracted grade: 97",
+        "Successfully updated submission_info.xlsx"
+      ]
+    },
+    {
+      "participant_id": "63699",
+      "folder": "C:\\Users\\Guest1\\CoOp\\Runi\\WorkSubmissions03\\Participant_63699_assignsubmission_file",
+      "pdf_found": "submission.pdf",
+      "self_grade_extracted": 93,
+      "excel_updated": true,
+      "error": null,
+      "notes": [
+        "Found PDF: MultiAgentCourse\\Assignment1\\submission.pdf",
+        "Extracted 110 characters of text",
+        "Extracted grade: 93",
+        "Successfully updated submission_info.xlsx"
+      ]
+    },
+    {
+      "participant_id": "63700",
+      "folder": "C:\\Users\\Guest1\\CoOp\\Runi\\WorkSubmissions03\\Participant_63700_assignsubmission_file",
+      "pdf_found": "מטלה 3 אריאל נפדנסקי ואבי פרדמן.pdf",
+      "self_grade_extracted": 95,
+      "excel_updated": true,
+      "error": null,
+      "notes": [
+        "Found PDF: מטלה 3 אריאל נפדנסקי ואבי פרדמן.pdf",
+        "Extracted 6185 characters of text",
+        "Extracted grade: 95",
+        "Successfully updated submission_info.xlsx"
+      ]
+    },
+    {
+      "participant_id": "63701",
+      "folder": "C:\\Users\\Guest1\\CoOp\\Runi\\WorkSubmissions03\\Participant_63701_assignsubmission_file",
+      "pdf_found": "Assignment3 Agentic Turing Machine.pdf",
+      "self_grade_extracted": 97,
+      "excel_updated": true,
+      "error": null,
+      "notes": [
+        "Found PDF: Assignment3 Agentic Turing Machine.pdf",
+        "Extracted 176 characters of text",
+        "Extracted grade: 97",
+        "Successfully updated submission_info.xlsx"
+      ]
+    },
+    {
+      "participant_id": "63702",
+      "folder": "C:\\Users\\Guest1\\CoOp\\Runi\\WorkSubmissions03\\Participant_63702_assignsubmission_file",
+      "pdf_found": "Assigment 3 - cover page.pdf",
+      "self_grade_extracted": 95,
+      "excel_updated": true,
+      "error": null,
+      "notes": [
+        "Found PDF: Assigment 3 - cover page.pdf",
+        "Extracted 7700 characters of text",
+        "Extracted grade: 95",
+        "Successfully updated submission_info.xlsx"
+      ]
+    },
+    {
+      "participant_id": "63704",
+      "folder": "C:\\Users\\Guest1\\CoOp\\Runi\\WorkSubmissions03\\Participant_63704_assignsubmission_file",
+      "pdf_found": "Hw3_The_Surfers_209361864_021387121.pdf",
+      "self_grade_extracted": 95,
+      "excel_updated": true,
+      "error": null,
+      "notes": [
+        "Found PDF: Hw3_The_Surfers_209361864_021387121.pdf",
+        "Extracted 153 characters of text",
+        "Extracted grade: 95",
+        "Successfully updated submission_info.xlsx"
+      ]
+    },
+    {
+      "participant_id": "63705",
+      "folder": "C:\\Users\\Guest1\\CoOp\\Runi\\WorkSubmissions03\\Participant_63705_assignsubmission_file",
+      "pdf_found": "Assignment 3 PDF LLM.pdf",
+      "self_grade_extracted": 94,
+      "excel_updated": true,
+      "error": null,
+      "notes": [
+        "Found PDF: Assignment 3 PDF LLM.pdf",
+        "Extracted 265 characters of text",
+        "Extracted grade: 94",
+        "Successfully updated submission_info.xlsx"
+      ]
+    },
+    {
+      "participant_id": "63706",
+      "folder": "C:\\Users\\Guest1\\CoOp\\Runi\\WorkSubmissions03\\Participant_63706_assignsubmission_file",
+      "pdf_found": "Turing Machine-30af9fe9-f034-4e99-972f-319b8171fb1d.pdf",
+      "self_grade_extracted": 94,
+      "excel_updated": true,
+      "error": null,
+      "notes": [
+        "Found PDF: Turing Machine-30af9fe9-f034-4e99-972f-319b8171fb1d.pdf",
+        "Extracted 4299 characters of text",
+        "Extracted grade: 94",
+        "Successfully updated submission_info.xlsx"
+      ]
+    },
+    {
+      "participant_id": "63707",
+      "folder": "C:\\Users\\Guest1\\CoOp\\Runi\\WorkSubmissions03\\Participant_63707_assignsubmission_file",
+      "pdf_found": "Promptopia - HW3.pdf",
+      "self_grade_extracted": 95,
+      "excel_updated": true,
+      "error": null,
+      "notes": [
+        "Found PDF: Promptopia - HW3.pdf",
+        "Extracted 2197 characters of text",
+        "Extracted grade: 95",
+        "Successfully updated submission_info.xlsx"
+      ]
+    },
+    {
+      "participant_id": "63708",
+      "folder": "C:\\Users\\Guest1\\CoOp\\Runi\\WorkSubmissions03\\Participant_63708_assignsubmission_file",
+      "pdf_found": "Assigment 3 - cover page copy.pdf",
+      "self_grade_extracted": 95,
+      "excel_updated": true,
+      "error": null,
+      "notes": [
+        "Found PDF: Assigment 3 - cover page copy.pdf",
+        "Extracted 7700 characters of text",
+        "Extracted grade: 95",
+        "Successfully updated submission_info.xlsx"
+      ]
+    },
+    {
+      "participant_id": "63709",
+      "folder": "C:\\Users\\Guest1\\CoOp\\Runi\\WorkSubmissions03\\Participant_63709_assignsubmission_file",
+      "pdf_found": "scubadivers.pdf",
+      "self_grade_extracted": 95,
+      "excel_updated": true,
+      "error": null,
+      "notes": [
+        "Found PDF: scubadivers.pdf",
+        "Extracted 2417 characters of text",
+        "Extracted grade: 95",
+        "Successfully updated submission_info.xlsx"
+      ]
+    },
+    {
+      "participant_id": "63711",
+      "folder": "C:\\Users\\Guest1\\CoOp\\Runi\\WorkSubmissions03\\Participant_63711_assignsubmission_file",
+      "pdf_found": "OmerAndYogever_HW2.pdf",
+      "self_grade_extracted": 85,
+      "excel_updated": true,
+      "error": null,
+      "notes": [
+        "Found PDF: OmerAndYogever_HW2.pdf",
+        "Extracted 6928 characters of text",
+        "Extracted grade: 85",
+        "Successfully updated submission_info.xlsx"
+      ]
+    },
+    {
+      "participant_id": "63712",
+      "folder": "C:\\Users\\Guest1\\CoOp\\Runi\\WorkSubmissions03\\Participant_63712_assignsubmission_file",
+      "pdf_found": "208933325.pdf",
+      "self_grade_extracted": 88,
+      "excel_updated": true,
+      "error": null,
+      "notes": [
+        "Found PDF: 208933325.pdf",
+        "Extracted 191 characters of text",
+        "Extracted grade: 88",
+        "Successfully updated submission_info.xlsx"
+      ]
+    },
+    {
+      "participant_id": "63713",
+      "folder": "C:\\Users\\Guest1\\CoOp\\Runi\\WorkSubmissions03\\Participant_63713_assignsubmission_file",
+      "pdf_found": "Assignment 3.pdf",
+      "self_grade_extracted": 97,
+      "excel_updated": true,
+      "error": null,
+      "notes": [
+        "Found PDF: Assignment 3.pdf",
+        "Extracted 5848 characters of text",
+        "Extracted grade: 97",
+        "Successfully updated submission_info.xlsx"
+      ]
+    },
+    {
+      "participant_id": "63714",
+      "folder": "C:\\Users\\Guest1\\CoOp\\Runi\\WorkSubmissions03\\Participant_63714_assignsubmission_file",
+      "pdf_found": "מטלה 3.pdf",
+      "self_grade_extracted": 96,
+      "excel_updated": true,
+      "error": null,
+      "notes": [
+        "Found PDF: מטלה 3.pdf",
+        "Extracted 199 characters of text",
+        "Extracted grade: 96",
+        "Successfully updated submission_info.xlsx"
+      ]
+    },
+    {
+      "participant_id": "63715",
+      "folder": "C:\\Users\\Guest1\\CoOp\\Runi\\WorkSubmissions03\\Participant_63715_assignsubmission_file",
+      "pdf_found": "TuringMachine-groupid-30af9fe9-f034-4e99-972f-319b8171fb1d.pdf",
+      "self_grade_extracted": 94,
+      "excel_updated": true,
+      "error": null,
+      "notes": [
+        "Found PDF: TuringMachine-groupid-30af9fe9-f034-4e99-972f-319b8171fb1d.pdf",
+        "Extracted 4299 characters of text",
+        "Extracted grade: 94",
+        "Successfully updated submission_info.xlsx"
+      ]
+    },
+    {
+      "participant_id": "63718",
+      "folder": "C:\\Users\\Guest1\\CoOp\\Runi\\WorkSubmissions03\\Participant_63718_assignsubmission_file",
+      "pdf_found": "scubadivers.pdf",
+      "self_grade_extracted": 95,
+      "excel_updated": true,
+      "error": null,
+      "notes": [
+        "Found PDF: scubadivers.pdf",
+        "Extracted 2417 characters of text",
+        "Extracted grade: 95",
+        "Successfully updated submission_info.xlsx"
+      ]
+    },
+    {
+      "participant_id": "63719",
+      "folder": "C:\\Users\\Guest1\\CoOp\\Runi\\WorkSubmissions03\\Participant_63719_assignsubmission_file",
+      "pdf_found": "OmerAndYogever_HW2.pdf",
+      "self_grade_extracted": 85,
+      "excel_updated": true,
+      "error": null,
+      "notes": [
+        "Found PDF: OmerAndYogever_HW2.pdf",
+        "Extracted 6928 characters of text",
+        "Extracted grade: 85",
+        "Successfully updated submission_info.xlsx"
+      ]
+    },
+    {
+      "participant_id": "63720",
+      "folder": "C:\\Users\\Guest1\\CoOp\\Runi\\WorkSubmissions03\\Participant_63720_assignsubmission_file",
+      "pdf_found": "Assignment 3.pdf",
+      "self_grade_extracted": 97,
+      "excel_updated": true,
+      "error": null,
+      "notes": [
+        "Found PDF: Assignment 3.pdf",
+        "Extracted 5848 characters of text",
+        "Extracted grade: 97",
+        "Successfully updated submission_info.xlsx"
+      ]
+    },
+    {
+      "participant_id": "63721",
+      "folder": "C:\\Users\\Guest1\\CoOp\\Runi\\WorkSubmissions03\\Participant_63721_assignsubmission_file",
+      "pdf_found": "מטלה 3.pdf",
+      "self_grade_extracted": 100,
+      "excel_updated": true,
+      "error": null,
+      "notes": [
+        "Found PDF: מטלה 3.pdf",
+        "Extracted 267 characters of text",
+        "Extracted grade: 100",
+        "Successfully updated submission_info.xlsx"
+      ]
+    },
+    {
+      "participant_id": "63722",
+      "folder": "C:\\Users\\Guest1\\CoOp\\Runi\\WorkSubmissions03\\Participant_63722_assignsubmission_file",
+      "pdf_found": "submission.pdf",
+      "self_grade_extracted": 93,
+      "excel_updated": true,
+      "error": null,
+      "notes": [
+        "Found PDF: MultiAgentCourse\\Assignment1\\submission.pdf",
+        "Extracted 110 characters of text",
+        "Extracted grade: 93",
+        "Successfully updated submission_info.xlsx"
+      ]
+    },
+    {
+      "participant_id": "63724",
+      "folder": "C:\\Users\\Guest1\\CoOp\\Runi\\WorkSubmissions03\\Participant_63724_assignsubmission_file",
+      "pdf_found": "Circular-translation-analysis.pdf",
+      "self_grade_extracted": 88,
+      "excel_updated": true,
+      "error": null,
+      "notes": [
+        "Found PDF: Circular-translation-analysis.pdf",
+        "Extracted 1494 characters of text",
+        "Extracted grade: 88",
+        "Successfully updated submission_info.xlsx"
+      ]
+    },
+    {
+      "participant_id": "63725",
+      "folder": "C:\\Users\\Guest1\\CoOp\\Runi\\WorkSubmissions03\\Participant_63725_assignsubmission_file",
+      "pdf_found": "ex3_bar_eldad.pdf",
+      "self_grade_extracted": 100,
+      "excel_updated": true,
+      "error": null,
+      "notes": [
+        "Found PDF: ex3_bar_eldad.pdf",
+        "Extracted 6206 characters of text",
+        "Extracted grade: 100",
+        "Successfully updated submission_info.xlsx"
+      ]
+    }
+  ],
+  "failed_extractions": [],
+  "grade_distribution": {
+    "94": 5,
+    "96": 2,
+    "100": 5,
+    "95": 11,
+    "92": 1,
+    "88": 3,
+    "97": 4,
+    "93": 2,
+    "85": 2
+  },
+  "needs_manual_review": []
+}
