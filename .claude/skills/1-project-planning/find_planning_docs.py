@@ -54,7 +54,9 @@ def analyze_prd(root_dir):
     prd_patterns = [
         r'prd\.md$',
         r'product.*requirements?\.md$',
+        r'product.*requirements?.*document\.md$',  # PRODUCT_REQUIREMENTS_DOCUMENT.md
         r'requirements?\.md$',
+        r'requirements?.*document\.md$',  # REQUIREMENTS_DOCUMENT.md
         r'prd\.txt$'
     ]
 
