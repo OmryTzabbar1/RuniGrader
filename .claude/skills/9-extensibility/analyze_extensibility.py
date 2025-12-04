@@ -48,11 +48,11 @@ def check_modular_structure(root_dir):
     return {'files_sampled': files_checked, 'avg_lines_per_file': avg_lines, 'is_modular': avg_lines < 200}
 
 def find_extensibility_docs(root_dir):
-    """Find extensibility/plugin documentation files."""
+    """Find extensibility/plugin documentation files and README sections."""
     doc_files = []
-    doc_quality = {'has_extension_points': False, 'has_examples': False, 'word_count': 0}
+    doc_quality = {'has_extension_points': False, 'has_examples': False, 'word_count': 0, 'in_readme': False}
 
-    # Patterns for extensibility documentation
+    # Patterns for dedicated extensibility documentation files
     patterns = [
         r'extensibility',
         r'extension',
@@ -63,12 +63,19 @@ def find_extensibility_docs(root_dir):
         r'extending'
     ]
 
+    readme_path = None
+
     for dirpath, dirnames, filenames in os.walk(root_dir):
         dirnames[:] = [d for d in dirnames if not d.startswith('.') and d not in ['node_modules', '__pycache__', 'venv']]
 
         for filename in filenames:
             # Check markdown, text, or doc files
             if filename.endswith(('.md', '.txt', '.rst', '.adoc')):
+                # Track README location
+                if filename.lower() == 'readme.md' and readme_path is None:
+                    readme_path = os.path.join(dirpath, filename)
+
+                # Check for dedicated extensibility docs
                 for pattern in patterns:
                     if re.search(pattern, filename, re.IGNORECASE):
                         full_path = os.path.join(dirpath, filename)
@@ -95,6 +102,52 @@ def find_extensibility_docs(root_dir):
 
                         doc_files.append(rel_path)
                         break
+
+    # If no dedicated extensibility docs found, check README for extensibility sections
+    if len(doc_files) == 0 and readme_path:
+        try:
+            with open(readme_path, 'r', encoding='utf-8', errors='ignore') as f:
+                content = f.read()
+
+                # Look for extensibility-related headers and content
+                ext_section_found = False
+                ext_content = []
+
+                for pattern in patterns:
+                    # Find headers with extensibility keywords
+                    header_pattern = r'^#{1,4}\s+.*' + pattern + r'.*$'
+                    matches = re.finditer(header_pattern, content, re.IGNORECASE | re.MULTILINE)
+
+                    for match in matches:
+                        ext_section_found = True
+                        # Extract section content (from header to next header of same level)
+                        start = match.start()
+                        header_level = len(match.group().split()[0])  # Count # symbols
+
+                        # Find next header of same or higher level
+                        next_header = re.search(r'\n#{1,' + str(header_level) + r'}\s+', content[start+1:])
+                        end = start + next_header.start() if next_header else len(content)
+
+                        section = content[start:end]
+                        ext_content.append(section)
+
+                if ext_section_found:
+                    combined_content = '\n'.join(ext_content)
+                    word_count = len(combined_content.split())
+
+                    # Check for extension points
+                    if re.search(r'extension point|plugin.*interface|custom.*class|extend.*system|override|hook|base class', combined_content, re.IGNORECASE):
+                        doc_quality['has_extension_points'] = True
+
+                    # Check for code examples
+                    if re.search(r'```|example.*:|usage.*:|class.*extends|def.*override', combined_content, re.IGNORECASE):
+                        doc_quality['has_examples'] = True
+
+                    doc_quality['word_count'] = word_count
+                    doc_quality['in_readme'] = True
+                    doc_files.append('README.md (extensibility section)')
+        except:
+            pass
 
     return doc_files, doc_quality
 
