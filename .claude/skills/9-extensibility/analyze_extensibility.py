@@ -47,6 +47,57 @@ def check_modular_structure(root_dir):
     avg_lines = total_lines / files_checked if files_checked > 0 else 0
     return {'files_sampled': files_checked, 'avg_lines_per_file': avg_lines, 'is_modular': avg_lines < 200}
 
+def find_extensibility_docs(root_dir):
+    """Find extensibility/plugin documentation files."""
+    doc_files = []
+    doc_quality = {'has_extension_points': False, 'has_examples': False, 'word_count': 0}
+
+    # Patterns for extensibility documentation
+    patterns = [
+        r'extensibility',
+        r'extension',
+        r'plugin',
+        r'customization',
+        r'api.*guide',
+        r'developer.*guide',
+        r'extending'
+    ]
+
+    for dirpath, dirnames, filenames in os.walk(root_dir):
+        dirnames[:] = [d for d in dirnames if not d.startswith('.') and d not in ['node_modules', '__pycache__', 'venv']]
+
+        for filename in filenames:
+            # Check markdown, text, or doc files
+            if filename.endswith(('.md', '.txt', '.rst', '.adoc')):
+                for pattern in patterns:
+                    if re.search(pattern, filename, re.IGNORECASE):
+                        full_path = os.path.join(dirpath, filename)
+                        rel_path = os.path.relpath(full_path, root_dir)
+
+                        # Analyze content quality
+                        try:
+                            with open(full_path, 'r', encoding='utf-8', errors='ignore') as f:
+                                content = f.read()
+                                word_count = len(content.split())
+
+                                # Check for extension points documentation
+                                if re.search(r'extension point|plugin.*interface|custom.*class|extend.*system|override|hook', content, re.IGNORECASE):
+                                    doc_quality['has_extension_points'] = True
+
+                                # Check for code examples
+                                if re.search(r'```|example.*:|usage.*:|class.*extends|def.*override', content, re.IGNORECASE):
+                                    doc_quality['has_examples'] = True
+
+                                doc_quality['word_count'] = max(doc_quality['word_count'], word_count)
+
+                        except:
+                            pass
+
+                        doc_files.append(rel_path)
+                        break
+
+    return doc_files, doc_quality
+
 def main():
     if len(sys.argv) < 2:
         print("Usage: python analyze_extensibility.py <repo_path>")
@@ -55,15 +106,20 @@ def main():
     plugin_dirs = find_plugin_system(repo_path)
     interfaces = find_interfaces(repo_path)
     modularity = check_modular_structure(repo_path)
+    ext_docs, doc_quality = find_extensibility_docs(repo_path)
     output = {
         'plugin_directories': plugin_dirs,
         'interface_files': interfaces,
         'modularity': modularity,
+        'extensibility_docs': ext_docs,
+        'doc_quality': doc_quality,
         'summary': {
             'has_plugin_system': len(plugin_dirs) > 0,
             'has_interfaces': len(interfaces) > 0,
             'is_modular': modularity['is_modular'],
-            'interface_count': len(interfaces)
+            'interface_count': len(interfaces),
+            'has_extension_docs': len(ext_docs) > 0,
+            'extension_doc_count': len(ext_docs)
         }
     }
     print(json.dumps(output, indent=2))
